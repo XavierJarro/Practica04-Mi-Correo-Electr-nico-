@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Iniciar Sesión</title>
+    <link href="css/style.css" rel="stylesheet" type="text/css" />
+</head>
+<header class="cab">
+    <h1>Inicio de Sesión</h1>
+</header>
+
+<body>
+    <form id="formulario01" method="POST" action="../controladores/login.php">
+        <div class="parte1">
+            <label for="correo">Correo electrónico(*)
+            </label>
+            <input type="text" id="correo" name="correo" value="" placeholder="Ingrese el correo ..." />
+            <br>
+            <label for="nombres">Constraseña (*)
+            </label>
+            <input type="password" id="contrasena" name="contrasena" value="" placeholder="Ingrese su contraseña ..." />
+            <br>
+            <input type="submit" id="login" name="login" value="Iniciar Sesión" />
+            <a href="crear_usuario.html"><input type="button" id="register" name="register" value="Registrarse" /></a>
+        </div>
+    </form>
+
+
+</body>
+
+</html>

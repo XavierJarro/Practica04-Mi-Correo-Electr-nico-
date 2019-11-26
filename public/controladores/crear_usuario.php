@@ -4,7 +4,7 @@
 <head>
 
     <meta charset="UTF-8">
-    <title>Correo Electronico</title>
+    <title>REUNIONES</title>
     <style type="text/css" rel="stylesheet">
         .error {
             color: red;
@@ -27,16 +27,16 @@
     $contrasena = isset($_POST["contrasena"]) ? trim($_POST["contrasena"]) : null;
     $pass = MD5($contrasena);
 
-    if ($_FILES["image"]["tmp_name"] != null) {
+    /*if ($_FILES["image"]["tmp_name"] != null) {
         $foto = addslashes(file_get_contents($_FILES["image"]["tmp_name"]));
     } else {
         $foto = addslashes(file_get_contents('../vista/images/usu.PNG'));
-    }
+    }*/
 
 
-    $sql = "INSERT INTO usuario VALUES(0, '$cedula', '$nombres', '$apellidos', '$direccion', '$telefono', '$correo', '$pass', '$fecha', 'N', null,null,'user','$foto');";
+    $sql = "INSERT INTO usuario VALUES(0, '$cedula', '$nombres', '$apellidos', '$direccion', '$telefono', '$correo', '$pass', '$fecha', 'N', null,null,'user');";
     if ($conn->query($sql) === TRUE) {
-        echo "<p>Se ha creado los datos personales correctamemte !!!</p>";
+        echo "<p>Se ha creado los datos personales correctamemte</p>";
     } else {
         if ($conn->errno == 1062) {
             echo "<p class='error'> La persona con la cedula $cedula ya está registrada en el sistema </p>";

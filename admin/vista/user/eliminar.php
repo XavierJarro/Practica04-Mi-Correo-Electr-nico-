@@ -12,7 +12,7 @@ if ($usurol == 'user') {
 
     <head>
         <meta charset="UTF-8">
-        <title>Correo Electronico</title>
+        <title>REUNIONES</title>
         <link href="../../../css/style.css" rel="stylesheet" type="text/css" />
     </head>
 

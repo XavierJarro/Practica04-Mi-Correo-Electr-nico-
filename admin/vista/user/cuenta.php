@@ -15,7 +15,7 @@ if ($usurol == 'user') {
 
     <head>
         <meta charset="UTF-8">
-        <title>Correo Electronico</title>
+        <title>REUNIONES</title>
         <link href="../../../css/style.css" rel="stylesheet" type="text/css" />
     </head>
 
@@ -36,7 +36,6 @@ if ($usurol == 'user') {
                 $fecha = $row["usu_fecha_nacimiento"];
                 $fecha = date('d/m/Y', strtotime(str_replace('-', '/', $fecha)));
                 $contrasena = $row["usu_password"];
-                $foto = $row["usu_foto"];
             }
         }
         ?>
@@ -44,7 +43,7 @@ if ($usurol == 'user') {
             <h2>Datos Usuario</h2>
             <nav class="navi">
                 <ul id="menu">
-                    <li><a href="#"> <img id="imagen" src="data:image/jpg;base64,<?php echo base64_encode($foto); ?>" alt="titulo foto" /> <?php echo $nombresui[0] . ' ' . $apellidosui[0] ?></a>
+                    <li><a href="#"><?php echo $nombresui[0] . ' ' . $apellidosui[0] ?></a>
                         <ul>
                             <li><a href="actualizar.php"> Modificar Datos</a></li>
                             <li><a href="../../controladores/user/eliminar.php?codigo=<?php echo $codigo; ?>"> Eliminar Usuario</a></li>
@@ -57,8 +56,8 @@ if ($usurol == 'user') {
             <nav class="naveg">
                 <ul>
                     <li> <a href="index.php">Inicio </a> </li>
-                    <li> <a href="mensajenu.php">Nuevo Mensaje</a> </li>
-                    <li> <a href="mensajesen.php">Mensajes Enviados</a> </li>
+                    <li> <a href="mensajenu.php">Nueva Reunion</a> </li>
+                    <li> <a href="mensajesen.php">Reuniones Enviados</a> </li>
                     <li> <a href="cuenta.php">Mi Cuenta</a> </li>
                 </ul>
             </nav>
@@ -85,12 +84,7 @@ if ($usurol == 'user') {
                 <input type="text" id="fechaNacimiento" name="fechaNacimiento" value="<?php echo $fecha; ?>" disabled />
                 <br>
                 <label for="correo">Correo electrónico</label>
-                <input type="text" id="correo" name="correo" value="<?php echo $correo; ?>" disabled />
-                <div class="parte2">
-                <label for="foto">Foto</label>
-                <img id="foto" src="data:image/*;base64,<?php echo base64_encode($foto); ?>" alt="titulo foto" />
-                <br>
-            </div>
+                <input type="text" id="correo" name="correo" value="<?php echo $correo; ?>" disabled />                
             </div>            
         </form>
         <?php

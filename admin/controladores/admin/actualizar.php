@@ -13,7 +13,7 @@ if ($usurol == 'admin') {
 
     <head>
         <meta charset="UTF-8">
-        <title>Correo Electronico</title>
+        <title>REUNIONES</title>
         <link href="../../../css/style.css" rel="stylesheet" type="text/css" />
     </head>
 
@@ -35,16 +35,15 @@ if ($usurol == 'admin') {
         $fecha = date('Y-m-d', strtotime(str_replace('/', '-', $fechaNacimiento)));
         $fechaMod = date('Y-m-d H:i:s', time());
 
-        if ($_FILES["image"]["tmp_name"] != null) {
-            $foto = addslashes(file_get_contents($_FILES["image"]["tmp_name"]));
-            $sql = "UPDATE usuario SET usu_cedula='$cedula',usu_nombres='$nombres', usu_apellidos='$apellidos', usu_direccion='$direccion', usu_telefono='$telefono', usu_correo='$correo', usu_fecha_nacimiento='$fecha',usu_foto='$foto', usu_fecha_modificacion='$fechaMod' WHERE usu_codigo=$codigo;";
+        /*if ($_FILES["image"]["tmp_name"] != null) {            
+            $sql = "UPDATE usuario SET usu_cedula='$cedula',usu_nombres='$nombres', usu_apellidos='$apellidos', usu_direccion='$direccion', usu_telefono='$telefono', usu_correo='$correo', usu_fecha_nacimiento='$fecha', usu_fecha_modificacion='$fechaMod' WHERE usu_codigo=$codigo;";
         } else {
             $sql = "UPDATE usuario SET usu_cedula='$cedula',usu_nombres='$nombres', usu_apellidos='$apellidos', usu_direccion='$direccion', usu_telefono='$telefono', usu_correo='$correo', usu_fecha_nacimiento='$fecha', usu_fecha_modificacion='$fechaMod' WHERE usu_codigo=$codigo;";
-        }
+        }*/
 
-        $sql = "UPDATE usuario SET usu_cedula='$cedula',usu_nombres='$nombres', usu_apellidos='$apellidos', usu_direccion='$direccion', usu_telefono='$telefono', usu_correo='$correo', usu_fecha_nacimiento='$fecha',usu_foto='$foto', usu_fecha_modificacion='$fechaMod' WHERE usu_codigo=$codigo;";
+        $sql = "UPDATE usuario SET usu_cedula='$cedula',usu_nombres='$nombres', usu_apellidos='$apellidos', usu_direccion='$direccion', usu_telefono='$telefono', usu_correo='$correo', usu_fecha_nacimiento='$fecha', usu_fecha_modificacion='$fechaMod' WHERE usu_codigo=$codigo;";
         if ($conn->query($sql) === TRUE) {
-            echo "<p>Se han actualizado los datos personales correctamemte !!!</p>";
+            echo "<p>Se han actualizado los datos personales correctamemte</p>";
         } else {
             if ($conn->errno == 1062) {
                 echo "<p class='error'> La persona con la cedula $cedula no se encuentra registrada en el sistema </p>";

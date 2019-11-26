@@ -14,7 +14,7 @@ if ($usurol == 'user') {
     <head>
 
         <meta charset="UTF-8">
-        <title>Correo Electronico</title>
+        <title>REUNIONES</title>
         <style type="text/css" rel="stylesheet">
             .error {
                 color: red;
@@ -28,10 +28,10 @@ if ($usurol == 'user') {
         //incluir conexión a la base de datos
         include '../../../config/conexionBD.php';
 
-        $cor_usu_destinatario = isset($_POST["destinatario"]) ? mb_strtoupper(trim($_POST["destinatario"]), 'UTF-8') : null;
+        $reu_invitado = isset($_POST["invitado"]) ? mb_strtoupper(trim($_POST["invitado"]), 'UTF-8') : null;
 
         $codigodes = 0;
-        $bus = "SELECT * FROM usuario WHERE usu_correo='$cor_usu_destinatario';";
+        $bus = "SELECT * FROM usuario WHERE usu_correo='$reu_invitado';";
         $resultb = $conn->query($bus);
         if ($resultb->num_rows > 0) {
             while ($row = $resultb->fetch_assoc()) {
@@ -39,14 +39,16 @@ if ($usurol == 'user') {
                 $rol = $row["usu_rol"];
             }
         }
-        $asunto = isset($_POST["asunto"])  ? trim($_POST["asunto"]) : null;
-        $mensaje =  isset($_POST["mensaje"]) ?  mb_strtoupper(trim($_POST["mensaje"])) : null;
+        $motivo = isset($_POST["motivo"])  ? trim($_POST["motivo"]) : null;
+        $observacion =  isset($_POST["observacion"]) ?  mb_strtoupper(trim($_POST["observacion"])) : null;
+        $lugar = isset($_POST["lugar"])  ? trim($_POST["lugar"]) : null;
+        $coordenada=isset($_POST["coordenada"])  ? trim($_POST["coordenada"]) : null;
         if ($rol == 'admin') {
-            echo "<h2> No se puede enviar correos a usuarios administradores </h2>";
+            echo "<h2> No se puede enviar la reunion a usuarios administradores </h2>";
         } else {
-            $sql = "INSERT INTO correo VALUES(0,NULL,$codigoui,$codigodes, '$asunto', '$mensaje','N',NULL);";
+            $sql = "INSERT INTO reunion VALUES(0,NULL,'$lugar','$coordenada',$codigoui,'$codigodes', '$motivo', '$observacion');";
             if ($conn->query($sql) === TRUE) {
-                echo "<p>Se ha enviado el correo correctamemte !!!</p>";
+                echo "<p>Se ha enviado la invitacion correctamente</p>";
             } else {
                 echo "<p class='error'>Error : " . mysqli_error($conn) . "</ p>";
             }

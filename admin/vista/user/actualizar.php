@@ -13,7 +13,7 @@ if ($usurol == 'user') {
 
     <head>
         <meta charset="UTF-8">
-        <title>Correo Electronico</title>
+        <title>REUNIONES</title>
         <link href="../../../css/style.css" rel="stylesheet" type="text/css" />
         <script type="text/javascript" src="../../../public/controladores/js/funciones.js"></script>
         <script type="text/javascript" src="../../../public/controladores/js/validaciones.js"></script>
@@ -36,7 +36,6 @@ if ($usurol == 'user') {
                 $fecha = $row["usu_fecha_nacimiento"];
                 $fecha = date('d/m/Y', strtotime(str_replace('-', '/', $fecha)));
                 $contrasena = $row["usu_password"];
-                $foto = $row["usu_foto"];
             }
         }
         ?>
@@ -66,12 +65,7 @@ if ($usurol == 'user') {
                 <br>
                 <label for="correo">Correo electrónico</label>
                 <input type="text" id="correo" name="correo" value="<?php echo $correo; ?>" />
-                <br>
-                <div class="parte2">
-                <label for="imagen">Foto</label>
-                <input id="uploadImage1" type="file" name="image" onchange="previewImage(1)" accept="image/*" />
-                <img id="uploadPreview1" src="data:image/*;base64,<?php echo base64_encode($foto); ?>" alt="titulo foto" />
-            </div>
+                <br>                
                 <input type="submit" id="eliminar" name="eliminar " value="Actualizar" />
                 <input type="reset" id="cancelar " name="cancelar" value="Cancelar" />
                 <a href="cuenta.php"> Regresar </a>

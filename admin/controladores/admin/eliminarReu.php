@@ -13,7 +13,7 @@ if ($usurol == 'admin') {
 
     <head>
         <meta charset="UTF-8">
-        <title>Correo Electronico</title>
+        <title>REUNIONES</title>
         <link href="../../../css/style.css" rel="stylesheet" type="text/css" />
     </head>
 
@@ -23,17 +23,15 @@ if ($usurol == 'admin') {
         </header>
         <?php
         include '../../../config/conexionBD.php';
-        #Eliminado Completo
-        #$sql = "DELETE FROM usuario WHERE usu_codigo=$codigo;";
+        #Eliminado Completa
+        
         date_default_timezone_set('America/Guayaquil');
-        $codigo = $_POST["codigo"];
-        $fecha = date('Y-m-d H:i:s', time());
-
+        $codigo = $_GET["codigo"];
         #Eliminado Lógico
-        $sql = "UPDATE correo SET cor_eliminado='S', cor_fecha_modificacion='$fecha' WHERE cor_codigo=$codigo;";
+        $sql = "DELETE FROM reunion WHERE reu_codigo=$codigo;";
 
         if ($conn->query($sql) === TRUE) {
-            echo "<p>Se han borrado los datos personales correctamemte !!!</p>";
+            echo "<p>Se han borrado la reunion correctamemte</p>";
         } else {
             if ($conn->errno == 1062) {
                 echo "<p class='error'> La persona con la cedula $cedula no se encuentra registrada en el sistema </p>";

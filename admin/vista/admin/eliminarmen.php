@@ -15,27 +15,29 @@ if ($usurol == 'admin') {
 
     <head>
         <meta charset="UTF-8">
-        <title>Correo Electronicos</title>
+        <title>REUNIONES</title>
         <link href="../../../css/style.css" rel="stylesheet" type="text/css" />
     </head>
 
     <body>
         <header class="cabis">
             <h2>
-                Eliminar Mensaje
+                Eliminar Reunion
             </h2>
         </header>
         <?php
         include '../../../config/conexionBD.php';
-        $sql = " SELECT * FROM correo WHERE cor_eliminado='N' AND cor_codigo=$_GET[codigo];";
+        $sql = " SELECT * FROM reunion WHERE reu_codigo=$_GET[codigo];";
         $result = $conn->query($sql);
         if ($result->num_rows > 0) {
             while ($row = $result->fetch_assoc()) {
                 $codigo = $row["cor_codigo"];
-                $asunto = $row["cor_asunto"];
-                $mensaje = $row["cor_mensaje"];
+                $motivo = $row["reu_motivo"];
+                $observacion = $row["reu_observacion"];                    
+                $lugar = $row["reu_lugar"];
+                $coordenada= $row["reu_coordenada"];
                 $correorem = "";
-                $bus = "SELECT * FROM usuario WHERE usu_codigo='$row[cor_usu_remitente]';";
+                $bus = "SELECT * FROM usuario WHERE usu_codigo='$row[reu_invitado]';";
                 $resultb = $conn->query($bus);
                 if ($resultb->num_rows > 0) {
                     while ($row = $resultb->fetch_assoc()) {
@@ -51,13 +53,23 @@ if ($usurol == 'admin') {
             <label for="destinatario">Correo Remitente</label>
             <input type="text" id="remitente" name="remitente" value="<?php echo $correorem ?>" placeholder="Ingrese el correo del destinatario
                         ..." disabled />
+            <label for="motivo"> Motivo</label>
+            <input type="text" id="motivo" name="motivo" value="<?php echo $motivo ?>" placeholder="Ingrese el motivo
+                                ..." disabled />
             <br>
-            <label for="asunto"> Asunto</label>
-            <input type="text" id="asunto" name="asunto" value="<?php echo $asunto ?>" placeholder="Ingrese el asunto
-                            ..." disabled />
+
+            <label for="lugar"> Lugar</label>
+            <input type="text" id="lugar" name="lugar" value="<?php echo $lugar ?>" placeholder="Ingrese el lugar
+                                ..." disabled />
             <br>
-            <label for="mensaje">Mensaje</label>
-            <textarea id="mensaje" name="mensaje" placeholder="Ingrese el mensaje..." disabled><?php echo $mensaje ?></textarea>
+
+            <label for="coordenada"> Coordenada</label>
+            <input type="text" id="coordenada" name="coordenada" value="<?php echo $coordenada ?>" placeholder="Ingrese la coordenada
+                                ..." disabled />
+            <br>
+            
+            <label for="Observacion">Observacion</label>
+            <textarea id="Observacion" name="Observacion" placeholder="Ingrese la Observacion..." disabled><?php echo $Observacion ?></textarea>
             <br>
             <input type="submit" id="eliminar" name="eliminar " value="Eliminar" />
             <input type="reset" id="cancelar " name="cancelar" value="Cancelar" />

@@ -14,7 +14,7 @@ if ($usurol == 'admin') {
 
     <head>
         <meta charset="UTF-8">
-        <title>Gestión de usuarios</title>
+        <title>REUNIONES</title>
         <link href="../../../css/stables.css" rel="stylesheet" type="text/css" />
         <link href="../../../css/style.css" rel="stylesheet" type="text/css" />
     </head>
@@ -24,14 +24,13 @@ if ($usurol == 'admin') {
         include '../../../config/conexionBD.php';
         $sqlu = "SELECT * FROM usuario WHERE usu_codigo='$codigoui';";
         $resultu = $conn->query($sqlu);
-        $row = $resultu->fetch_assoc();
-        $foto = $row["usu_foto"];
+        $row = $resultu->fetch_assoc();        
         ?>
         <header class="cabis">
-            <h2> Listado de Usuarios </h2>
+            <h2> Listado</h2>
             <nav class="navi">
                 <ul id="menu">
-                    <li><a href="#"> <img id="imagen" src="data:image/*;base64,<?php echo base64_encode($foto); ?>"> <?php echo $nombresui[0] . ' ' . $apellidosui[0] ?></a>
+                    <li><a href="#"> <?php echo $nombresui[0] . ' ' . $apellidosui[0] ?></a>
                         <ul>
                             <li><a href="../../../config/cerrarSesion.php"> Cerrar Sesión</a></li>
                         </ul>
@@ -46,25 +45,30 @@ if ($usurol == 'admin') {
             </nav>
         </header>
         <table id="tbl">
+        
             <caption>
-                <h4>Mensajes Electrónicos </h4>
+                <h4>Reuniones </h4>
             </caption>
             <tr>
                 <th>Fecha</th>
                 <th>Remitente</th>
-                <th>Destinatario</th>
-                <th>Asunto</th>
-                <th>Eliminar</th>
+                <th>Invitado</th>
+                <th>Motivo</th>
+                <th>Lugar</th>
+                <th>Coordenada</th>
+                <th>Eliminar Reunion</th>
             </tr>
             <?php
-            $sql = "SELECT * FROM correo WHERE cor_eliminado='N' ORDER BY cor_fecha_hora DESC;";
+            $sql = "SELECT * FROM reunion ORDER BY reu_fecha_hora DESC;";
             $result = $conn->query($sql);
             if ($result->num_rows > 0) {
                 while ($row = $result->fetch_assoc()) {
-                    $codigo = $row["cor_codigo"];
-                    $fecha = $row["cor_fecha_hora"];
-                    $asunto = $row["cor_asunto"];
-                    $array = array(0 => $row["cor_usu_remitente"], 1 => $row["cor_usu_destinatario"]);
+                    $codigo = $row["reu_codigo"];
+                    $fecha = $row["reu_fecha_hora"];
+                    $motivo = $row["reu_motivo"];
+                    $lugar = $row["reu_lugar"];
+                    $coordenada= $row["reu_coordenada"];
+                    $array = array(0 => $row["reu_invitado"], 1 => $row["reu_invitado"]);
                     $array2 = [];
                     foreach ($array as $i => $value) {
                         $bus = "SELECT * FROM usuario WHERE usu_codigo=$array[$i];";
@@ -79,8 +83,10 @@ if ($usurol == 'admin') {
                     echo "   <td>" . $fecha . "</td>";
                     echo "   <td>" . $array2[0] . "</td>";
                     echo "   <td>" . $array2[1] . "</td>";
-                    echo "   <td>" . $asunto . "</td>";
-                    echo "   <td> <a href='eliminarmen.php?codigo=$codigo'> Ir </a> </td>";
+                    echo "   <td>" . $motivo . "</td>";
+                    echo "   <td>" . $lugar . "</td>";
+                    echo "   <td>" . $coordenada . "</td>";
+                    echo "   <td> <a href='/correo/admin/controladores/admin/eliminarReu.php?codigo=$codigo'> Ir </a> </td>";
                     echo "</tr>";
                 }
             } else {

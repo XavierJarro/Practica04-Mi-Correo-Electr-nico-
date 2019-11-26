@@ -1,7 +1,7 @@
-function buscarPorCorreo() {
-    var correo = document.getElementById("correo").value
+function buscarPorMotivo() {
+    var motivo = document.getElementById("motivo").value
     var loc = location.pathname
-    if (correo == "") {
+    if (motivo == "") {
         if (loc == "/correo/admin/vista/user/mensajesen.php") {
             location.href = "mensajesen.php";
         } else if (loc == "/correo/admin/vista/user/index.php") {
@@ -21,7 +21,7 @@ function buscarPorCorreo() {
                 document.getElementById("tbl").innerHTML = this.responseText;
             }
         };
-        xmlhttp.open("GET", "../../controladores/user/buscar.php?correo=" + correo + "&url=" + loc, true);
+        xmlhttp.open("GET", "../../controladores/user/buscar.php?motivo=" + motivo + "&url=" + loc, true);
         xmlhttp.send();
     }
     return false;

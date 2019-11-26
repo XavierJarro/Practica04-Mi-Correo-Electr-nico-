@@ -14,7 +14,7 @@ if ($usurol == 'admin') {
 
     <head>
         <meta charset="UTF-8">
-        <title>Correo Electronico</title>
+        <title>REUNIONES</title>
         <link href="../../../css/stables.css" rel="stylesheet" type="text/css" />
         <link href="../../../css/style.css" rel="stylesheet" type="text/css" />
     </head>
@@ -24,16 +24,15 @@ if ($usurol == 'admin') {
         include '../../../config/conexionBD.php';
         $sqlu = "SELECT * FROM usuario WHERE usu_codigo='$codigoui';";
         $resultu = $conn->query($sqlu);
-        $row = $resultu->fetch_assoc();
-        $foto = $row["usu_foto"];
+        $row = $resultu->fetch_assoc();        
         ?>
         <header class="cabis">
             <h2>
-                Listado de Usuarios
+                Listado
             </h2>
             <nav class="navi">
                 <ul id="menu">
-                    <li><a href="#"> <img id="imagen" src="data:image/*;base64,<?php echo base64_encode($foto); ?>"> <?php echo $nombresui[0] . ' ' . $apellidosui[0] ?></a>
+                    <li><a href="#"> <?php echo $nombresui[0] . ' ' . $apellidosui[0] ?></a>
                         <ul>
                             <li><a href="../../../config/cerrarSesion.php"> Cerrar Sesión</a></li>
                         </ul>
@@ -52,7 +51,6 @@ if ($usurol == 'admin') {
                 <h4>Lista de Usuarios </h4>
             </caption>
             <tr>
-                <th>Foto</th>
                 <th>Cedula</th>
                 <th>Nombres</th>
                 <th>Apellidos</th>
@@ -77,10 +75,8 @@ if ($usurol == 'admin') {
                     $telefono = $row["usu_telefono"];
                     $correo = $row["usu_correo"];
                     $fecha = $row["usu_fecha_nacimiento"];
-                    $contrasena = $row["usu_password"];
-                    $foto = $row["usu_foto"];
-                    echo "<tr>";
-                    echo " <td>" . "<img id='imagen' src='data:image/*;base64," . base64_encode($foto) . "'></td>";
+                    $contrasena = $row["usu_password"];                    
+                    echo "<tr>";                    
                     echo " <td>" . $cedula . "</td>";
                     echo " <td>" . $nombres . "</td>";
                     echo " <td>" . $apellidos . "</td>";

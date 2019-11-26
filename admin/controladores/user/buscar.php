@@ -15,44 +15,49 @@ if ($usurol == 'user') {
 
     <head>
         <meta charset="UTF-8">
-        <title>Correo Electronico</title>
+        <title>REUNIONES</title>
         <link href="../../../css/stables.css" rel="stylesheet" type="text/css" />
     </head>
 
     <body>
         <table id="tbl">
             <?php
-            $correo = $_GET['correo'];
+            $motivo = $_GET['motivo'];
             $url = $_GET['url'];
             include '../../../config/conexionBD.php';
             $val = false;
             $val1 = false;
             $array = [];
-            $bus = "SELECT * FROM usuario WHERE usu_correo LIKE '$correo%';";
+            $bus = "SELECT * FROM reunion WHERE reu_motivo LIKE '$motivo';";
             $resultb = $conn->query($bus);
             if ($resultb->num_rows > 0) {
                 while ($row = $resultb->fetch_assoc()) {
-                    $array[] = $row["usu_codigo"];
+                    $array[] = $row["reu_invitado"];
                 }
             }
             if (count($array) != 0) {
                 if ($url == "/correo/admin/vista/user/mensajesen.php") {
                     echo "<tr>";
                     echo "<th>Fecha</th>";
-                    echo "<th>Destinatario</th>";
-                    echo " <th>Asunto</th>";
+                    echo "<th>Invitado</th>";
+                    echo " <th>Motivo</th>";
+                    echo " <th>Lugar</th>";
+                    echo " <th>Coordenada</th>";
                     echo "<th>Leer</th>";
                     echo "</tr>";
                     foreach ($array as $i => $value) {
-                        $sql = "SELECT * FROM correo WHERE cor_eliminado='N' AND cor_usu_destinatario=$array[$i] AND cor_usu_remitente=$codigoui ORDER BY cor_fecha_hora DESC;";
+                        //$sql = "SELECT * FROM reunion WHERE reu_invitado=$array[$i] AND reu_remitente=$codigoui ORDER BY reu_fecha_hora DESC;";
+                        $sql = "SELECT * FROM reunion WHERE reu_invitado=$array[$i] AND reu_invitado=$codigoui ORDER BY reu_fecha_hora DESC;";
                         $result = $conn->query($sql);
                         if ($result->num_rows > 0) {
                             while ($row = $result->fetch_assoc()) {
-                                $codigo = $row["cor_codigo"];
-                                $fecha = $row["cor_fecha_hora"];
-                                $asunto = $row["cor_asunto"];
+                                $codigo = $row["reu_codigo"];
+                                $fecha = $row["reu_fecha_hora"];
+                                $motivo = $row["reu_motivo"];
+                                $lugar = $row["reu_lugar"];
+                                $coordenada= $row["reu_coordenada"];
                                 $correodes = "";
-                                $bus = "SELECT * FROM usuario WHERE usu_codigo=$row[cor_usu_destinatario];";
+                                $bus = "SELECT * FROM usuario WHERE usu_codigo=$row[reu_invitado];";
                                 $resultb = $conn->query($bus);
                                 if ($resultb->num_rows > 0) {
                                     while ($row = $resultb->fetch_assoc()) {
@@ -62,7 +67,9 @@ if ($usurol == 'user') {
                                 echo "<tr>";
                                 echo "   <td>" . $fecha . "</td>";
                                 echo "   <td>" . $correodes . "</td>";
-                                echo "   <td>" . $asunto . "</td>";
+                                echo "   <td>" . $motivo . "</td>";
+                                echo "   <td>" . $lugar . "</td>";
+                                echo "   <td>" . $coordenada . "</td>";
                                 echo "   <td> <a href='eliminar.php?codigo=$codigo'> Ir </a> </td>";
                                 echo "</tr>";
                             }
@@ -72,26 +79,30 @@ if ($usurol == 'user') {
                     }
                     if ($val1 == true) {
                         echo "<tr>";
-                        echo "   <td colspan='4'> No existen correos enviados de usuarios que su correo empieze con $correo </td>";
+                        echo "   <td colspan='4'> No existen reuniones de usuarios que su motivo empieze con $motivo </td>";
                         echo "</tr>";
                     }
                 } else if ($url == "/correo/admin/vista/user/index.php") {
                     echo "<tr>";
                     echo "<th>Fecha</th>";
                     echo "<th>Remitente</th>";
-                    echo " <th>Asunto</th>";
+                    echo " <th>Motivo</th>";
+                    echo " <th>Lugar</th>";
+                    echo " <th>Coordenada</th>";
                     echo "<th>Leer</th>";
                     echo "</tr>";
                     foreach ($array as $i => $value) {
-                        $sql = "SELECT * FROM correo WHERE cor_eliminado='N' AND cor_usu_remitente=$array[$i] AND cor_usu_destinatario=$codigoui ORDER BY cor_fecha_hora DESC;";
+                        $sql = "SELECT * FROM reunion WHERE reu_invitado=$array[$i] AND reu_remitente=$codigoui ORDER BY reu_fecha_hora DESC;";
                         $result = $conn->query($sql);
                         if ($result->num_rows > 0) {
                             while ($row = $result->fetch_assoc()) {
-                                $codigo = $row["cor_codigo"];
-                                $fecha = $row["cor_fecha_hora"];
-                                $asunto = $row["cor_asunto"];
+                                $codigo = $row["reu_codigo"];
+                                $fecha = $row["reu_fecha_hora"];
+                                $motivo = $row["reu_motivo"];
+                                $lugar = $row["reu_lugar"];
+                                $coordenada= $row["reu_coordenada"];
                                 $correodes = "";
-                                $bus = "SELECT * FROM usuario WHERE usu_codigo=$row[cor_usu_remitente];";
+                                $bus = "SELECT * FROM usuario WHERE usu_codigo=$row[reu_invitado];";
                                 $resultb = $conn->query($bus);
                                 if ($resultb->num_rows > 0) {
                                     while ($row = $resultb->fetch_assoc()) {
@@ -101,7 +112,9 @@ if ($usurol == 'user') {
                                 echo "<tr>";
                                 echo "   <td>" . $fecha . "</td>";
                                 echo "   <td>" . $correodes . "</td>";
-                                echo "   <td>" . $asunto . "</td>";
+                                echo "   <td>" . $motivo . "</td>";
+                                echo "   <td>" . $lugar . "</td>";
+                                echo "   <td>" . $coordenada . "</td>";
                                 echo "   <td> <a href='eliminar.php?codigo=$codigo'> Ir </a> </td>";
                                 echo "</tr>";
                             }
@@ -111,7 +124,7 @@ if ($usurol == 'user') {
                     }
                     if ($val == true) {
                         echo "<tr>";
-                        echo "   <td colspan='4'>  No existen correos enviados de usuarios que su correo empieze con $correo </td>";
+                        echo "   <td colspan='4'>  No existen reuniones de usuarios que su motivo empieze con $motivo </td>";
                         echo "</tr>";
                     }
                 }
@@ -119,22 +132,26 @@ if ($usurol == 'user') {
                 if ($url == "/correo/admin/vista/user/mensajesen.php") {
                     echo "<tr>";
                     echo "<th>Fecha</th>";
-                    echo "<th>Destinatario</th>";
-                    echo " <th>Asunto</th>";
+                    echo "<th>Remitente</th>";
+                    echo " <th>Motivo</th>";
+                    echo " <th>Lugar</th>";
+                    echo " <th>Coordenada</th>";
                     echo "<th>Leer</th>";
                     echo "</tr>";
                     echo "<tr>";
-                    echo "   <td colspan='4'>  No existen correos enviados de usuarios que su correo empieze con $correo </td>";
+                    echo "   <td colspan='4'>  No existen reuniones de usuarios que su motivo empieze con $motivo </td>";
                     echo "</tr>";
                 } else if ($url == "/correo/admin/vista/user/index.php") {
                     echo "<tr>";
                     echo "<th>Fecha</th>";
                     echo "<th>Remitente</th>";
-                    echo " <th>Asunto</th>";
+                    echo " <th>Motivo</th>";
+                    echo " <th>Lugar</th>";
+                    echo " <th>Coordenada</th>";
                     echo "<th>Leer</th>";
                     echo "</tr>";
                     echo "<tr>";
-                    echo "   <td colspan='4'>  No existen correos enviados de usuarios que su correo empieze con $correo </td>";
+                    echo "   <td colspan='4'>  No existen reuniones de usuarios que su motivo empieze con $motivo </td>";
                     echo "</tr>";
                 }
             }

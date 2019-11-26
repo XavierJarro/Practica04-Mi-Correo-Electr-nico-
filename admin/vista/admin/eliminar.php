@@ -12,7 +12,7 @@ if ($usurol == 'admin') {
 
     <head>
         <meta charset="UTF-8">
-        <title>Correo Electronico</title>
+        <title>REUNIONES</title>
         <link href="../../../css/style.css" rel="stylesheet" type="text/css" />
     </head>
 
@@ -32,8 +32,7 @@ if ($usurol == 'admin') {
                     $correo = $row["usu_correo"];
                     $fecha = $row["usu_fecha_nacimiento"];
                     $fecha = date('d/m/Y', strtotime(str_replace('-', '/', $fecha)));
-                    $contrasena = $row["usu_password"];
-                    $foto = $row["usu_foto"];
+                    $contrasena = $row["usu_password"];                    
                 }
             }
             ?>
@@ -63,12 +62,7 @@ if ($usurol == 'admin') {
                 <br>
                 <label for="correo">Correo electrónico</label>
                 <input type="text" id="correo" name="correo" value="<?php echo $correo; ?>" disabled />
-                <br>
-                <div class="parte2">
-                    <label for="imagen">Foto</label>
-                    <input id="uploadImage1" type="file" name="image" onchange="previewImage(1)" accept="image/*" />
-                    <img id="foto" src="data:image/*;base64,<?php echo base64_encode($foto); ?>" alt="titulo foto" />
-                </div>
+                <br>                
                 <input type="submit" id="eliminar" name="eliminar " value="Eliminar" />
                 <input type="reset" id="cancelar " name="cancelar" value="Cancelar" />
                 <a href="listado.php"> Regresar </a>

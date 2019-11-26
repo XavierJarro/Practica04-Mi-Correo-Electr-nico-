@@ -15,7 +15,7 @@ if ($usurol == 'user') {
 
     <head>
         <meta charset="UTF-8">
-        <title>Sistema de Gestion de Usuarios</title>
+        <title>Correo Electronico</title>
         <link href="../../../public/vista/css/style.css" rel="stylesheet" type="text/css" />
     </head>
 
@@ -66,32 +66,32 @@ if ($usurol == 'user') {
         <form id="formulario01">
             <div class="parte1">
                 <input type="hidden" id="codigo" name="codigo" value=" <?php echo $codigo ?>" />
-                <label for="cedula">Cedula (*)</label>
+                <label for="cedula">Cedula</label>
                 <input type="text" id="cedula" name="cedula" value="<?php echo $cedula; ?>" disabled />
                 <br>
-                <label for="nombres">Nombres (*)</label>
+                <label for="nombres">Nombres</label>
                 <input type="text" id="nombres" name="nombres" value="<?php echo $nombres; ?>" disabled />
                 <br>
-                <label for="apellidos">Apelidos (*)</label>
+                <label for="apellidos">Apelidos</label>
                 <input type="text" id="apellidos" name="apellidos" value="<?php echo $apellidos; ?>" disabled />
                 <br>
-                <label for="direccion">Dirección (*)</label>
+                <label for="direccion">Dirección</label>
                 <input type="text" id="direccion" name="direccion" value="<?php echo $direccion; ?>" disabled />
                 <br>
-                <label for="telefono">Teléfono (*)</label>
+                <label for="telefono">Teléfono</label>
                 <input type="text" id="telefono" name="telefono" value="<?php echo $telefono; ?>" disabled />
                 <br>
-                <label for="fecha">Fecha Nacimiento (*)</label>
+                <label for="fecha">Fecha Nacimiento</label>
                 <input type="text" id="fechaNacimiento" name="fechaNacimiento" value="<?php echo $fecha; ?>" disabled />
                 <br>
-                <label for="correo">Correo electrónico (*)</label>
+                <label for="correo">Correo electrónico</label>
                 <input type="text" id="correo" name="correo" value="<?php echo $correo; ?>" disabled />
-            </div>
-            <div class="parte2">
-                <label for="foto">Foto (*)</label>
+                <div class="parte2">
+                <label for="foto">Foto</label>
                 <img id="foto" src="data:image/*;base64,<?php echo base64_encode($foto); ?>" alt="titulo foto" />
                 <br>
             </div>
+            </div>            
         </form>
         <?php
         $conn->close();

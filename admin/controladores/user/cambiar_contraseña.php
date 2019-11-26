@@ -9,7 +9,7 @@ if (!isset($_SESSION['isUser']) || $_SESSION['isUser'] === FALSE) {
 
 <head>
     <meta charset="UTF-8">
-    <title>Modificar datos de persona </title>
+    <title>Correo Electronico</title>
 </head>
 
 <body>

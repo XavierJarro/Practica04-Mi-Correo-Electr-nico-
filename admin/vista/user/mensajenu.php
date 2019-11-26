@@ -15,7 +15,7 @@ if ($usurol == 'user') {
 
     <head>
         <meta charset="UTF-8">
-        <title>Sistema de Gestion de Usuarios</title>
+        <title>Correo Electronico</title>
         <link href="../../../public/vista/css/style.css" rel="stylesheet" type="text/css" />
     </head>
 
@@ -29,7 +29,7 @@ if ($usurol == 'user') {
         ?>
         <header class="cabis">
             <h2>
-                Nuevo Mensaje
+                Mensaje Nuevo 
             </h2>
             <nav class="navi">
                 <ul id="menu">
@@ -52,17 +52,14 @@ if ($usurol == 'user') {
         </header>
         <form id="formulario01" method="POST" action="../../controladores/user/crearCorreo.php">
             <div class="parte1">
-                <label for="destinatario">Correo Destinatario
-                    (*)</label>
-                <input type="text" id="destinatario" name="destinatario" value="" placeholder="Ingrese el correo del destinatario
-                                                    ..." required />
+                <label for="destinatario">Correo Destinatario</label>
+                <input type="text" id="destinatario" name="destinatario" value=""/>
                 <br>
-                <label for="asunto"> Asunto (*)</label>
-                <input type="text" id="asunto" name="asunto" value="" placeholder="Ingrese el asunto
-                                                        ..." required />
+                <label for="asunto"> Asunto</label>
+                <input type="text" id="asunto" name="asunto" value=""/>
                 <br>
-                <label for="mensaje">Mensaje (*)</label>
-                <textarea id="mensaje" name="mensaje" placeholder="Ingrese el mensaje..." required></textarea>
+                <label for="mensaje">Mensaje</label>
+                <textarea id="mensaje" name="mensaje"></textarea>
                 <br>
                 <input type="submit" id="crear" name="crear" value="Enviar" />
                 <input type="reset" id="cancelar" name="cancelar" value="Cancelar" />

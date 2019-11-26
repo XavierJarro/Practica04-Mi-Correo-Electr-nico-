@@ -15,19 +15,19 @@ if ($usurol == 'admin') {
 
     <head>
         <meta charset="UTF-8">
-        <title>Sistema de Gestion de Usuarios</title>
+        <title>Correo Electronicos</title>
         <link href="../../../public/vista/css/style.css" rel="stylesheet" type="text/css" />
     </head>
 
     <body>
         <header class="cabis">
             <h2>
-                Lectura Mensaje
+                Eliminar Mensaje
             </h2>
         </header>
         <?php
         include '../../../config/conexionBD.php';
-        $sql = " WHERE cor_eliminado='N' AND cor_codigo=$_GET[codigo];";
+        $sql = " SELECT * FROM correo WHERE cor_eliminado='N' AND cor_codigo=$_GET[codigo];";
         $result = $conn->query($sql);
         if ($result->num_rows > 0) {
             while ($row = $result->fetch_assoc()) {
@@ -48,16 +48,15 @@ if ($usurol == 'admin') {
         ?>
         <form id="formulario01" method="POST" action="../../controladores/admin/eliminarmen.php">
             <input type="hidden" id="codigo" name="codigo" value=" <?php echo $codigo ?>" />
-            <label for="destinatario">Correo Remitente
-                (*)</label>
+            <label for="destinatario">Correo Remitente</label>
             <input type="text" id="remitente" name="remitente" value="<?php echo $correorem ?>" placeholder="Ingrese el correo del destinatario
                         ..." disabled />
             <br>
-            <label for="asunto"> Asunto (*)</label>
+            <label for="asunto"> Asunto</label>
             <input type="text" id="asunto" name="asunto" value="<?php echo $asunto ?>" placeholder="Ingrese el asunto
                             ..." disabled />
             <br>
-            <label for="mensaje">Mensaje (*)</label>
+            <label for="mensaje">Mensaje</label>
             <textarea id="mensaje" name="mensaje" placeholder="Ingrese el mensaje..." disabled><?php echo $mensaje ?></textarea>
             <br>
             <input type="submit" id="eliminar" name="eliminar " value="Eliminar" />

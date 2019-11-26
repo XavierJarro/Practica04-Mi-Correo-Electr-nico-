@@ -3,68 +3,63 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Sistema de Gestion de Usuarios</title>
+    <title>Correo Electronico</title>
     <link href="css/style.css" rel="stylesheet" type="text/css" />
-    <script type="text/javascript" src="../controladores/js/funciones.js"> </script>
-    <script type="text/javascript" src="../controladores/js/validaciones.js"> </script>
+    <link href="../../css/formulario.css" rel="stylesheet" type="text/css" />
+    <script type="text/javascript" src="../controladores/js/funciones.js">
+    </script>
+    <script type="text/javascript" src="../controladores/js/validaciones.js">
+    </script>
 </head>
 
 <body>
     <header class="cab">
-        <h1>Insertar Nueva Persona</h1>
+        <h1>Crear nuevo usuario</h1>
     </header>
-    <form id="formulario01" method="POST" enctype="multipart/form-data" action="../controladores/crear_usuario.php"
-        onsubmit="return validarCamposObligatorios()">
+    <form id="formulario01" method="POST" enctype="multipart/form-data" action="../controladores/crear_usuario.php" onsubmit="return validarCamposObligatorios()">
         <div class=" parte1">
-            <label for="cedula">Cedula
-                (*)</label>
-            <input type="text" id="cedula" name="cedula" value="" placeholder="Ingrese el número de cedula
-                    ..." />
+            <label for="cedula">Cedula</label>
+            <input type="text" id="cedula" name="cedula" value="" />
             <span id="mensajeCedula" class="error"> </span>
             <br>
-            <label for="nombres">Nombres (*)</label>
-            <input type="text" id="nombres" name="nombres" value="" placeholder="Ingrese sus dos nombres
-                        ..." onkeyup="valLetras(this)" />
+            <label for="nombres">Nombres</label>
+            <input type="text" id="nombres" name="nombres" value="" onkeyup="valLetras(this)" />
             <span id="mensajeNombres" class="error"></span>
             <br>
-            <label for="apellidos">Apelidos (*)</label>
-            <input type="text" id="apellidos" name="apellidos" value="" placeholder="Ingrese sus dos apellidos..."
-                onkeyup="valLetras(this)" />
+            <label for="apellidos">Apelidos</label>
+            <input type="text" id="apellidos" name="apellidos" value="" onkeyup="valLetras(this)" />
             <span id="mensajeApellidos" class="error"></span>
             <br>
-            <label for="direccion">Dirección (*)</label>
-            <input type="text" id="direccion" name="direccion" value="" placeholder="Ingrese su dirección ..." />
+            <label for="direccion">Dirección</label>
+            <input type="text" id="direccion" name="direccion" value="" />
             <span id="mensajeDireccion" class="error"></span>
             <br>
-            <label for="telefono">Teléfono (*)</label>
-            <input type="text" id="telefono" name="telefono" value="" placeholder="Ingrese su número telefónico..."
-                onkeyup="valNumeros(this)" />
+            <label for="telefono">Teléfono </label>
+            <input type="text" id="telefono" name="telefono" value="" onkeyup="valNumeros(this)" />
             <span id="mensajeTelefono" class="error"></span>
             <br>
-            <label for="fecha">Fecha Nacimiento (*)</label>
-            <input type="text" id="fechaNacimiento" name="fechaNacimiento" value=""
-                placeholder="Ingrese su fecha de nacimiento ..." />
+            <label for="fecha">Fecha Nacimiento</label>
+            <input type="text" id="fechaNacimiento" name="fechaNacimiento" value="" />
             <span id="mensajeFechaNacimiento" class="error"></span>
             <br>
-            <label for="correo">Correo electrónico (*)</label>
-            <input type="text" id="correo" name="correo" value="" placeholder="Ingrese su correo electrónico
-                        ..." />
+            <label for="correo">Correo electrónico</label>
+            <input type="text" id="correo" name="correo" value="" />
             <span id="mensajeCorreo" class="error"></span>
             <br>
-            <label for="correo">Contraseña (*)</label>
-            <input type="password" id="contrasena" name="contrasena" value="" placeholder="Ingrese su contraseña
-                            ..." />
+            <label for="correo">Contraseña</label>
+            <input type="password" id="contrasena" name="contrasena" value="" />
             <span id="mensajeContrasena" class="error"></span>
             <br>
-            <input type="submit" id="crear" name="crear" value="Aceptar" />
-            <input type="reset" id="cancelar" name="cancelar" value="Cancelar" />
-            <a href="login.html"><input type="button" id="login" name="login"
-                    value="Ya tienes una cuenta Ingresa" /></a>
-        </div>
-        <div class=" parte2">
-            <label for="imagen">Seleccione imagen a cargar</label>
+            <br>
+            <label for="imagen">Seleccione imagen para su perfil</label>
+            <br>
             <input id="uploadImage1" type="file" name="image" onchange="previewImage(1)" accept="image/*" />
-            <img id="uploadPreview1" width="150" height="150" src="images/usu.PNG" />
+            <img id="uploadPreview1" width="150" height="150" />
+            <br>
+            <input type="submit" id="crear" name="crear" value="Crear Usuario" />
+            <a href="login.html"><input type="button" id="login" name="login" value="Iniciar Sesion" /></a>
+            <input type="reset" id="cancelar" name="cancelar" value="Cancelar" />
+
         </div>
     </form>
 </body>

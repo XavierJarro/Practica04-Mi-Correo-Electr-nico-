@@ -13,7 +13,7 @@ if ($usurol == 'user') {
 
     <head>
         <meta charset="UTF-8">
-        <title>Sistema de Gestion de Usuarios</title>
+        <title>Correo Electronico</title>
         <link href="../../public/vista/css/style.css" rel="stylesheet" type="text/css" />
     </head>
 
@@ -34,7 +34,7 @@ if ($usurol == 'user') {
             $sql = "UPDATE usuario SET usu_eliminado='S', usu_fecha_modificacion='$fecha' WHERE usu_codigo=$codigo;";
 
             if ($conn->query($sql) === TRUE) {
-                echo "<p>Se han borrado los datos personales correctamemte !!!</p>";
+                echo "<p>Se han borrado los datos personales correctamemte</p>";
             } else {
                 if ($conn->errno == 1062) {
                     echo "<p class='error'> La persona con la cedula $cedula no se encuentra registrada en el sistema </p>";

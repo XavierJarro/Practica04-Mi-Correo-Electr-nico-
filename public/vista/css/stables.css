@@ -1,22 +1,25 @@
 #tbl {
+    color: white;
     width: 100%;
     border: 1px solid;
     float: right;
 }
 
-#col1{
+#col1 {
     width: 20%;
 }
 
-#col2,#col3{
+#col2,
+#col3 {
     width: 40%;
 }
 
-th, td {
+th,
+td {
     vertical-align: center;
     border: 1px solid;
 }
 
-#tf{
+#tf {
     width: 100%;
 }

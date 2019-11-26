@@ -14,7 +14,7 @@ if ($usurol == 'user') {
     <head>
 
         <meta charset="UTF-8">
-        <title>Nuevo Mensaje</title>
+        <title>Correo Electronico</title>
         <style type="text/css" rel="stylesheet">
             .error {
                 color: red;

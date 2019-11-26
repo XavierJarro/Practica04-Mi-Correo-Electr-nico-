@@ -91,12 +91,6 @@ if ($usurol == 'admin') {
             $conn->close();
             ?>
         </table>
-
-        <footer>
-            <h5> Copyright </h5>
-            <h5> Jordan Murillo </h5>
-            <h5> 2019 </h5>
-        </footer>
     </body>
 
     </html>

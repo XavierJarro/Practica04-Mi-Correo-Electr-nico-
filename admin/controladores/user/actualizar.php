@@ -13,7 +13,7 @@ if ($usurol == 'user') {
 
     <head>
         <meta charset="UTF-8">
-        <title>Sistema de Gestion de Usuarios</title>
+        <title>Correo Electronico</title>
         <link href="../../public/vista/css/style.css" rel="stylesheet" type="text/css" />
     </head>
 

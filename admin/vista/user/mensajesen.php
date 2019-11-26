@@ -15,7 +15,7 @@ if ($usurol == 'user') {
 
     <head>
         <meta charset="UTF-8">
-        <title>Gestión de usuarios</title>
+        <title>Correo Electronico</title>
         <link href="../../../public/vista/css/stables.css" rel="stylesheet" type="text/css" />
         <link href="../../../public/vista/css/style.css" rel="stylesheet" type="text/css" />
         <script type="text/javascript" src="../../controladores/user/js/metodos.js"> </script>
@@ -31,7 +31,7 @@ if ($usurol == 'user') {
         ?>
         <header class="cabis">
             <h2>
-                Listado de Correos del Usuario
+                Listado de Correos
             </h2>
             <nav class="navi">
                 <ul id="menu">
@@ -52,9 +52,7 @@ if ($usurol == 'user') {
             </nav>
             <h4>Mensajes Enviados</h4>
         </header>
-        <table id="tbl">
-            <input autofocus type="text" id="correo" name="correo" value="" placeholder="Ingrese el correo del destinatario para buscar" required onkeyup="buscarPorCorreo()" />
-            <a href=""><img id="imagen2" src="../../../public/vista/images/lupa.png"></a>
+        <table id="tbl">            
             <tr>
                 <th>Fecha</th>
                 <th>Destinatario</th>
@@ -94,12 +92,6 @@ if ($usurol == 'user') {
             $conn->close();
             ?>
         </table>
-
-        <footer>
-            <h5> Copyright </h5>
-            <h5> Jordan Murillo </h5>
-            <h5> 2019 </h5>
-        </footer>
     </body>
 
     </html>

@@ -15,8 +15,8 @@ if ($usurol == 'admin') {
     <head>
         <meta charset="UTF-8">
         <title>Gestión de usuarios</title>
-        <link href="../../../public/vista/css/stables.css" rel="stylesheet" type="text/css" />
-        <link href="../../../public/vista/css/style.css" rel="stylesheet" type="text/css" />
+        <link href="../../../css/stables.css" rel="stylesheet" type="text/css" />
+        <link href="../../../css/style.css" rel="stylesheet" type="text/css" />
     </head>
 
     <body>

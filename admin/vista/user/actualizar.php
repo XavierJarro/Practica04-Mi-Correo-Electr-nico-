@@ -14,7 +14,7 @@ if ($usurol == 'user') {
     <head>
         <meta charset="UTF-8">
         <title>Correo Electronico</title>
-        <link href="../../../public/vista/css/style.css" rel="stylesheet" type="text/css" />
+        <link href="../../../css/style.css" rel="stylesheet" type="text/css" />
         <script type="text/javascript" src="../../../public/controladores/js/funciones.js"></script>
         <script type="text/javascript" src="../../../public/controladores/js/validaciones.js"></script>
     </head>

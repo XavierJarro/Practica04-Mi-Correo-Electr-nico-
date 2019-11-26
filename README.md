@@ -4,10 +4,10 @@
 - Crear sitios web aplicando estándares actuales.
 
 ## 1.	Generar el diagrama E-R para la solución de la práctica.
-![1](https://user-images.githubusercontent.com/56524895/69604416-608ff600-0feb-11ea-9852-c2fbacf1d667.png)
+![1](https://user-images.githubusercontent.com/56524895/69665057-92d73d00-1057-11ea-8bdb-96e33b292152.png)
 ## 2.	Nombre de la base de datos.
 El nombre de la base de datos es “practica”.
-![2](https://user-images.githubusercontent.com/56524895/69604478-9503b200-0feb-11ea-9312-afa96c4e3a77.png)
+![2](https://user-images.githubusercontent.com/56524895/69665083-a387b300-1057-11ea-99dc-dba2693232bc.png)
 ## 3.	Sentencias SQL de la estructura de la base de datos.
 
 ### Creación de tabla usuario:
@@ -32,31 +32,29 @@ ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
 
 ### Creación de tabla correo:
 
-CREATE TABLE `correo` (
- `cor_codigo` int(11) NOT NULL AUTO_INCREMENT, 
-`cor_fecha_hora` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
- `cor_usu_remitente` int(11) NOT NULL,
- `cor_usu_destinatario` int(11) NOT NULL, 
-`cor_asunto` varchar(50) NOT NULL, 
-`cor_mensaje` varchar(255) NOT NULL,
- `cor_eliminado` varchar(1) NOT NULL DEFAULT 'N', 
-`cor_fecha_modificacion` timestamp NULL DEFAULT NULL, 
-PRIMARY KEY (`cor_codigo`), 
-FOREIGN KEY (`cor_usu_remitente`) REFERENCES usuario(usu_codigo),
-FOREIGN KEY (`cor_usu_destinatario`) REFERENCES usuario(usu_codigo) 
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
+CREATE TABLE `reunion`. ( `reu_codigo` INT NOT NULL AUTO_INCREMENT ,
+ `reu_fecha_hora` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ,
+ `reu_lugar` VARCHAR(50) NOT NULL ,
+ `reu_coordenada` VARCHAR(100) NOT NULL ,
+ `reu_remitente` INT NOT NULL , 
+`reu_invitado` INT NOT NULL ,
+ `reu_motivo` VARCHAR(255) NOT NULL ,
+ `reu_observacion` VARCHAR(255) NOT NULL ,
+ PRIMARY KEY (`reu_codigo`)) ENGINE = InnoDB;PRIMARY KEY (`reu_codigo`), 
+FOREIGN KEY (`reu_remitente`) REFERENCES usuario(usu_codigo),
+FOREIGN KEY (`reu_invitado`) REFERENCES usuario(usu_codigo) 
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1
 
-## 4.	Creación de la página index.php del usuario. Donde creamos una lista donde se encuentre el menú de la página nuevomensaje, mensajesenviados, Mi Cuenta y finalmente el cerrar sesión.
+
+## 4.	Creación de la página index.php del usuario. Donde creamos una lista donde se encuentre el menú de la página nueva reunion, reuniones enviadas, Mi Cuenta y finalmente el cerrar sesión.
 ![3](https://user-images.githubusercontent.com/56524895/69604564-d4320300-0feb-11ea-8a04-d436ee45fa2e.png)
-Hacemos una consulta sql para poder cargar la foto que se encuentra en la base del usuario que este dentro de la página, en donde utilizamos una etiqueta img para poder ver la imagen del usuario.
-![4](https://user-images.githubusercontent.com/56524895/69604595-e8760000-0feb-11ea-9857-a2a720b5f3f3.png)
-Creamos otra consulta para que en la página index se me visualice los mensajes que han enviado. En donde utilizo la variable session para poder obtener el código del usuario que se encuentra dentro de la página, y asi poder obtener los mensajes que han enviado a este usuario. En la sentencia sql pongo una condición, que es que me muestre que el correo no este eliminado, es decir si el correo tiene el valor N en la columna correo_eliminado es que se encuentra eliminado. Y finalmente que me muestre los mensajes más recientes, para lo cual utilize ORDER BY DESC. Para que se me visualice el correo electrónico del remitente utilizo dentro del while otra sentencia sql para poder obtener el correo del remitente en cada iteración del while, y finalmente lo muestro en la tabla.
+Creamos otra consulta para que en la página index se me visualice las reuniones que han enviado. En donde utilizo la variable session para poder obtener el código del usuario que se encuentra dentro de la página, y asi poder obtener los mensajes que han enviado a este usuario. En la sentencia sql pongo una condición, que es que me muestre que el correo no este eliminado, es decir si el correo tiene el valor N en la columna reunion_eliminado es que se encuentra eliminado. Y finalmente que me muestre los mensajes más recientes, para lo cual utilize ORDER BY DESC. Para que se me visualice el correo electrónico del remitente utilizo dentro del while otra sentencia sql para poder obtener la reunión del remitente en cada iteración del while, y finalmente lo muestro en la tabla.
 ![5](https://user-images.githubusercontent.com/56524895/69604619-faf03980-0feb-11ea-9074-df36296b97b2.png)
-Para poder leer los mensajes utilice una etiqueta a dentro de la tabla que me permitirá leer el correo que ha enviado el remitente. Para esto utilizo el método get para pasar el código del correo a la página leer.php. En la página leer.php hacemos una consulta sql donde obtenemos todo de un correo en específico mediante el código del correo, el cual lo obtenemos de la página index.php mediante el método GET. Después obtenemos el correo del remitente mediante otra consulta sql , donde obtenemos el correo del remitente mediante el código de dicho remitente, para ello utilizamos el resultado del anterior secuencia sql. A continuación, creo un formulario html, en donde en el value de cada input de doy el valores de las sentencias sql.
+Para poder leer los mensajes utilice una etiqueta a dentro de la tabla que me permitirá leer la reunión que ha enviado el remitente. Para esto utilizo el método get para pasar el código de la reunión a la página leer.php. En la página leer.php hacemos una consulta sql donde obtenemos todo de una reunión en específico mediante el código de la reunión, el cual lo obtenemos de la página index.php mediante el método GET. Después obtenemos la reunión del remitente mediante otra consulta sql, donde obtenemos la reunión del remitente mediante el código de dicho remitente, para ello utilizamos el resultado de la anterior secuencia sql. A continuación, creo un formulario html, en donde en el value de cada input de doy el valor de las sentencias sql.
 ![6](https://user-images.githubusercontent.com/56524895/69604661-10656380-0fec-11ea-9cd0-bbc886576acd.png)
-En la página mensajes enviados para obtener los mensajes que el usuario ha enviado utilizo la variable SESSION, para así obtener el código del usuario y con este preguntar en una sentencia sql si el código del destinatario sea igual al código del usuario que se encuentra en la página web. Dentro del while hago otra consulta sql para poder obtener el correo del destinatario y visualizarlo en la tabla. Para visualizar utilizamos una tabla para que nos muestre los mensajes y al final una opción leer para poder leer el mensaje. Para Poder leer el mensaje accedemos a la página leer.php de los controladores, y hacemos el mismo procedimiento que en la página index para los mensajes recibidos.
+En la página reuniones enviados para obtener las reuniones que el usuario ha enviado utilizo la variable SESSION, para así obtener el código del usuario y con este preguntar en una sentencia sql si el código del destinatario sea igual al código del usuario que se encuentra en la página web. Dentro del while hago otra consulta sql para poder obtener la reunión del destinatario y visualizarlo en la tabla. Para visualizar utilizamos una tabla para que nos muestre las reuniones y al final una opción leer para poder leer la reunión. Para Poder leer la reunión accedemos a la página leer.php de los controladores, y hacemos el mismo procedimiento que en la página index para las reuniones recibidos.
 ![7](https://user-images.githubusercontent.com/56524895/69604682-207d4300-0fec-11ea-8eea-5546ad3a2e64.png)
-Para poder mandar un correo a otro usuario creamos un formulario para poder escribir el asunto, el mansaje y el destinatario a quien queremos escribir. Después mediante el formulario accedemos a la página nuevomensaje.php mediante un action y el método $_POST.
+Para poder mandar una reunión a otro usuario creamos un formulario para poder escribir el asunto, el mensaje y el destinatario a quien queremos escribir. Después mediante el formulario accedemos a la página nuevomensaje.php mediante un action y el método $_POST.
 ![8](https://user-images.githubusercontent.com/56524895/69604750-4b679700-0fec-11ea-90dd-b49d25460a78.png)
 ![9](https://user-images.githubusercontent.com/56524895/69604751-4c002d80-0fec-11ea-8ca1-e85fee07206a.png)
 Después obtenemos el valor de las cajas del formulario con el método POST y hacemos una sentencia sql para poder insertar en la base de datos los valores, donde también hacemos otra sentencia para obtener el código del destinatario y poder asignarlo a la base.
@@ -94,31 +92,31 @@ Cuando damos cerrar sesion nos manda al archivo cerrar_sesion_User y nos Cierra 
 ![25](https://user-images.githubusercontent.com/56524895/69605189-769eb600-0fed-11ea-9d07-2ab3411c3bdb.png)
 ## 5.	La evidencia del correcto diseño de las páginas HTML usando CSS.
 ### Crear Usuario.
-![26](https://user-images.githubusercontent.com/56524895/69605279-b8c7f780-0fed-11ea-9752-8c56893fc458.png)
+![26](https://user-images.githubusercontent.com/56524895/69667094-560d4500-105b-11ea-925f-873e938910ff.png)
 ### Iniciar sesión.
-![27](https://user-images.githubusercontent.com/56524895/69605281-b9f92480-0fed-11ea-9b71-a801cf49153d.png)
+![27](https://user-images.githubusercontent.com/56524895/69667108-5d345300-105b-11ea-98ae-2d37311e1988.png)
 ### Como admin:
-![28](https://user-images.githubusercontent.com/56524895/69605291-bcf41500-0fed-11ea-8b23-898048d164bf.png)
+![28](https://user-images.githubusercontent.com/56524895/69667122-632a3400-105b-11ea-9d60-5d7fca90cd0e.png)
 ### Listar usuarios.
-![29](https://user-images.githubusercontent.com/56524895/69605385-f593ee80-0fed-11ea-9e5f-4331210b6042.png)
+![29](https://user-images.githubusercontent.com/56524895/69667137-6d4c3280-105b-11ea-8b48-7473db8d77f5.png)
 ### Eliminar usuario.
-![30](https://user-images.githubusercontent.com/56524895/69605391-fb89cf80-0fed-11ea-981a-c3bb67f814a0.png)
+![30](https://user-images.githubusercontent.com/56524895/69667150-73421380-105b-11ea-8367-cc67e5c2f6cb.png)
 ### Actualizar Usuario.
-![31](https://user-images.githubusercontent.com/56524895/69605423-13615380-0fee-11ea-9177-b24044b714d2.png)
+![31](https://user-images.githubusercontent.com/56524895/69667164-7937f480-105b-11ea-8cb4-e51de10f8762.png)
 ### Cambiar contrase;a usurio.
-![32](https://user-images.githubusercontent.com/56524895/69605463-283de700-0fee-11ea-9cb7-e899d2418439.png)
+![32](https://user-images.githubusercontent.com/56524895/69667174-7fc66c00-105b-11ea-8ba3-9171a37167a9.png)
 ### Inicio de sesión user.
-![33](https://user-images.githubusercontent.com/56524895/69605487-3be94d80-0fee-11ea-8e55-71a5caba097d.png)
-### Nuevo mensaje.
-![34](https://user-images.githubusercontent.com/56524895/69605511-4c99c380-0fee-11ea-8c72-7dd7f7221635.png)
-### Mensajes enviados.
-![35](https://user-images.githubusercontent.com/56524895/69605545-5fac9380-0fee-11ea-925e-04405a3b1f32.png)
+![33](https://user-images.githubusercontent.com/56524895/69667189-86ed7a00-105b-11ea-9e0d-481c09c510c0.png)
+### Nueva Reunion.
+![34](https://user-images.githubusercontent.com/56524895/69667201-8ce35b00-105b-11ea-92e6-26342ac691ed.png)
+### Reunion enviadas.
+![35](https://user-images.githubusercontent.com/56524895/69667237-9967b380-105b-11ea-8b0d-af3d58bb2e87.png)
 ### Datos del usuario.
-![36](https://user-images.githubusercontent.com/56524895/69605567-7226cd00-0fee-11ea-98e7-85e38a70f25c.png)
+![36](https://user-images.githubusercontent.com/56524895/69667256-a1bfee80-105b-11ea-9d85-21d9e8288e7f.png)
 ### Actualizar usuario.
-![37](https://user-images.githubusercontent.com/56524895/69605588-836fd980-0fee-11ea-91bf-ae3a8ff812f5.png)
+![37](https://user-images.githubusercontent.com/56524895/69667269-a97f9300-105b-11ea-80b7-b6baa71f5db5.png)
 ### Cambiar contrase;a.
-![38](https://user-images.githubusercontent.com/56524895/69605609-94b8e600-0fee-11ea-95e0-d1e43cde282f.png)
+![38](https://user-images.githubusercontent.com/56524895/69667279-b00e0a80-105b-11ea-8dcf-f378bea98322.png)
 ## 6.	En el informe se debe incluir la información de GitHub (usuario y URL del repositorio de la práctica)
 Usuario:XavierJarro
 URL: https://github.com/XavierJarro/Practica04-Mi-Correo-Electr-nico-

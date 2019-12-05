@@ -4,10 +4,10 @@
 - Crear sitios web aplicando estándares actuales.
 
 ## 1.	Generar el diagrama E-R para la solución de la práctica.
-![1](https://user-images.githubusercontent.com/56524895/69665057-92d73d00-1057-11ea-8bdb-96e33b292152.png)
+![1](https://user-images.githubusercontent.com/56524895/70261989-7c209c80-1761-11ea-8346-32182d12cfc2.png)
 ## 2.	Nombre de la base de datos.
 El nombre de la base de datos es “practica”.
-![2](https://user-images.githubusercontent.com/56524895/69665083-a387b300-1057-11ea-99dc-dba2693232bc.png)
+![2](https://user-images.githubusercontent.com/56524895/70262008-83e04100-1761-11ea-90e7-613a1151b8d0.png)
 ## 3.	Sentencias SQL de la estructura de la base de datos.
 
 ### Creación de tabla usuario:
@@ -29,20 +29,31 @@ PRIMARY KEY (`usu_codigo`),
 UNIQUE KEY `usu_cedula` (`usu_cedula`))
 ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
 
-### Creación de tabla correo:
+### Creación de tabla reunión:
 
 CREATE TABLE `reunion`. ( `reu_codigo` INT NOT NULL AUTO_INCREMENT ,
  `reu_fecha_hora` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ,
  `reu_lugar` VARCHAR(50) NOT NULL ,
- `reu_coordenada` VARCHAR(100) NOT NULL ,
- `reu_remitente` INT NOT NULL , 
-`reu_invitado` INT NOT NULL ,
+ `reu_coordenada` VARCHAR(100) NOT NULL , 
+`reu_eliminado` VARCHAR (1) NOT NULL DEFAULT 'N',
  `reu_motivo` VARCHAR(255) NOT NULL ,
  `reu_observacion` VARCHAR(255) NOT NULL ,
  PRIMARY KEY (`reu_codigo`)) ENGINE = InnoDB;PRIMARY KEY (`reu_codigo`), 
-FOREIGN KEY (`reu_remitente`) REFERENCES usuario(usu_codigo),
-FOREIGN KEY (`reu_invitado`) REFERENCES usuario(usu_codigo) 
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
+
+### Creacion de table invitacion:
+
+CREATE TABLE `invitacion`. ( `inv_codigo` INT NOT NULL AUTO_INCREMENT , 
+`inv_eliminado` VARCHAR (1) NOT NULL DEFAULT 'N',
+inv_remitente INT NOT NULL , 
+inv_invitado INT NOT NULL ,
+inv_reunion INT NOT NULL ,
+PRIMARY KEY (`inv_codigo`)) ENGINE = InnoDB;PRIMARY KEY (`inv_codigo`), 
+FOREIGN KEY (`inv_remitente`) REFERENCES usuario(usu_codigo),
+FOREIGN KEY (`inv_invitado`) REFERENCES usuario(usu_codigo),
+FOREIGN KEY (`inv_reunion`) REFERENCES reunion(reu_codigo) 
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
+
 
 
 ## 4.	Creación de la página index.php del usuario. Donde creamos una lista donde se encuentre el menú de la página nueva reunion, reuniones enviadas, Mi Cuenta y finalmente el cerrar sesión.
